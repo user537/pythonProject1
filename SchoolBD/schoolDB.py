@@ -1,14 +1,20 @@
 import json
 from itertools import count
 
+#Вроде этот кусок кода бесполезен
+#Нужно написать парсер для Json и потом уже сделать так, чтобы id добавлялся +1
 student_id_gen = count()
 teacher_id_gen = count()
 classroom_id_gen = count()
 
+#создать списки для студентов,  учителей, классов,
+#но где и как оно потом используется?
 students = []
 teachers = []
 classroom = []
-with open("winter_storage.json") as fp:
+
+#Ну ок, тут уже понятнее становится. Ниже используем список "Студенты"
+with open("/SchoolBD/winter_storage.json") as fp:
     data = json.load(fp)
     students = data["students"]
 
@@ -59,6 +65,7 @@ elif command == "3":
         dict(students_count=students_count, letter=letter, subject_list=subject_list, id=next(classroom_id_gen)))
     print(template_classroom.format(classroom[-1]["students_count"], classroom[-1]["letter"],
                                     classroom[-1]["subject_list"]))
+else: print("Нет такой темы")
 
 # command = input()
 with open("winter_storage.json", "w") as fp:
