@@ -7,14 +7,11 @@ student_id_gen = count()
 teacher_id_gen = count()
 classroom_id_gen = count()
 
-#создать списки для студентов,  учителей, классов,
-#но где и как оно потом используется?
 students = []
 teachers = []
 classroom = []
 
-#Ну ок, тут уже понятнее становится. Ниже используем список "Студенты"
-with open("/SchoolBD/winter_storage.json") as fp:
+with open("storage.json") as fp:
     data = json.load(fp)
     students = data["students"]
 
@@ -34,7 +31,7 @@ if command == "1":
     print(" введите краткую характеристику")
     description = input()
     students.append(dict(name=name, age=age, gender=gender, description=description, id=next(student_id_gen)))
-    with open('students.csv', 'a') as f:
+    with open('students.json', 'a') as f:
         f.write(f"{name},{age},{gender},{description},{student_id_gen}\n")
 
     print(template_students.format(students[-1]["name"], students[-1]["age"], students[-1]["gender"],
