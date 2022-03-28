@@ -30,9 +30,18 @@ if command == "1":
     gender = input()
     print(" введите краткую характеристику")
     description = input()
-    students.append(dict(name=name, age=age, gender=gender, description=description, id=next(student_id_gen)))
+
+    students_data = {
+    "Name": name,
+    "Age": age,
+    "Gender": gender,
+    "Description": description,
+    "Count": student_id_gen
+}
+    #students.append(dict(name=name, age=age, gender=gender, description=description, id=next(student_id_gen)))
     with open('students.json', 'a') as f:
-        f.write(f"{name},{age},{gender},{description},{student_id_gen}\n")
+       # f.write(json.dumps(f"name:{name},age:{age},gender:{gender},description:{description},count:{student_id_gen}\n"))
+       json.dump(students_data, f)
 
     print(template_students.format(students[-1]["name"], students[-1]["age"], students[-1]["gender"],
                                    students[-1]["description"]))
